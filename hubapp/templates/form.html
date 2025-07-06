@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brokage Hub - Secure Registration Form</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="icon" type="image/svg+xml" href="{% static '' %}svg/favicon.svg">
+<link rel="stylesheet" href="{% static '' %}css/form.css"> 
+
+</head>
+<body>
+  <!-- Animated Background -->
+  <div class="bg-animated">
+    <div class="bg-shape bg-shape1"></div>
+    <div class="bg-shape bg-shape2"></div>
+    <div class="bg-shape bg-shape3"></div>
+  </div>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      {% comment %} <a href="#home" class="logo"><img src="{% static '' %}svg/logo.svg" alt="Brokage Hub Logo" style="height:48px;"></a> {% endcomment %}
+      <a class="btn" style="color:#fff; padding: 0.5rem 1rem;" href="#" onclick="history.back()">← Back to Home</a>
+    </div>
+  </nav>
+
+   <!-- Messages -->
+  {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+        <div class="message {{ message.tags }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+
+ 
+  <div class="form-container" data-aos="fade-up">
+    <div class="form-title">Registration Form</div>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <!-- Personal Information -->
+      <div class="form-section" data-aos="fade-right">
+        <span class="section-label">Personal Information</span>
+        <div class="form-group">
+          <label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+          {{ form.first_name }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
+          {{ form.last_name }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+          {{ form.email }}
+          {% if form.email.errors %}
+            <div class="error-message">{{ form.email.errors.0 }}</div>
+          {% endif %}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.address.id_for_label }}">{{ form.address.label }}</label>
+          {{ form.address }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.phone.id_for_label }}">{{ form.phone.label }}</label>
+          {{ form.phone }}
+          {% if form.phone.errors %}
+            <div class="error-message">{{ form.phone.errors.0 }}</div>
+          {% endif %}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.ssn.id_for_label }}">{{ form.ssn.label }}</label>
+          {{ form.ssn}}
+        </div>
+      </div>
+      
+      <!-- Means of Identification -->
+      <div class="form-section" data-aos="fade-right" data-aos-delay="100">
+        <span class="section-label">Means of Identification</span>
+        <div class="form-group">
+          <span class="file-label">{{ form.id_front.label }}</span>
+          {{ form.id_front }}
+        </div>
+        <div class="form-group">
+          <span class="file-label">{{ form.id_back.label }}</span>
+          {{ form.id_back }}
+        </div>
+      </div>
+      
+      <!-- Tax Record / Identification -->
+      <div class="form-section" data-aos="fade-right" data-aos-delay="200">
+        <span class="section-label">Tax Record / Identification</span>
+        <div class="form-group">
+          <span class="file-label">{{ form.w2_form.label }}</span>
+          {{ form.w2_form }}
+        </div>
+      </div>
+
+        <!-- Consent Section -->
+      <div class="consent-section" data-aos="fade-right" data-aos-delay="300">
+        <div class="consent-checkbox">
+          {{ form.idme_consent }}
+          <label for="{{ form.idme_consent.id_for_label }}" class="consent-text">
+            {{ form.idme_consent.label }}
+          </label>
+        </div>
+      </div>  
+      
+      <button type="submit" class="btn">Submit</button>
+    </form>
+  </div>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Designed & Built by {{hub.name|title}}&nbsp;Team</p>
+    <p>&copy; 2023 {{hub.name|title}}. All Rights Reserved.</p>
+  </footer>
+  
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  {% comment %} <script src="{% static '' %}js/index.js"></script> {% endcomment %}
+  <script>
+    AOS.init({ duration: 1000, once: true, offset: 50 });
+
+        // Real-time email validation
+    document.getElementById('id_email').addEventListener('blur', function() {
+      const email = this.value;
+      const validationDiv = document.getElementById('email-validation');
+      
+      if (email) {
+        fetch(`/check-email/?email=${encodeURIComponent(email)}`)
+          .then(response => response.json())
+          .then(data => {
+            if (data.exists) {
+              validationDiv.className = 'validation-message error';
+              validationDiv.textContent = 'Email is available.';
+            }
+          })
+          .catch(error => {
+            console.error('Error checking email:', error);
+          });
+      } else {
+        validationDiv.className = 'validation-message';
+        validationDiv.textContent = '';
+      }
+    });
+    
+    // Real-time phone validation
+    document.getElementById('id_phone').addEventListener('blur', function() {
+      const phone = this.value;
+      const validationDiv = document.getElementById('phone-validation');
+      
+      if (phone) {
+        fetch(`/check-phone/?phone=${encodeURIComponent(phone)}`)
+          .then(response => response.json())
+          .then(data => {
+            if (data.exists) {
+              validationDiv.className = 'validation-message error';
+              validationDiv.textContent = 'This phone number is already registered.';
+            } else {
+              validationDiv.className = 'validation-message success';
+              validationDiv.textContent = 'Phone number is available.';
+            }
+          })
+          .catch(error => {
+            console.error('Error checking phone:', error);
+          });
+      } else {
+        validationDiv.className = 'validation-message';
+        validationDiv.textContent = '';
+      }
+    });
+    
+    // Auto-hide messages after 5 seconds
+    document.addEventListener('DOMContentLoaded', function() {
+      const messages = document.querySelectorAll('.message');
+      messages.forEach(message => {
+        setTimeout(() => {
+          message.style.animation = 'slideOut 0.5s ease-in forwards';
+          setTimeout(() => message.remove(), 500);
+        }, 5000);
+      });
+    });
+  </script>
+    <style>
+    @keyframes slideOut {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(100%); opacity: 0; }
+    }
+    
+  </style>
+</body>
+{% comment %} </html>This email is already registered.';
+            } else {
+              validationDiv.className = 'validation-message success';
+              validationDiv.textContent = ' {% endcomment %}

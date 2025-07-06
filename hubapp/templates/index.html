@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brokage Hub - Your Trusted Financial Partner</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="icon" type="image/svg+xml" href="{% static '' %}svg/favicon.svg">
+  <link rel="stylesheet" href="{% static '' %}css/index.css"> 
+</head>
+<body>
+  <!-- Animated Background -->
+  <div class="bg-animated">
+    <div class="bg-shape bg-shape1"></div>
+    <div class="bg-shape bg-shape2"></div>
+    <div class="bg-shape bg-shape3"></div>
+  </div>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#home" class="logo"><img src="{% static '' %}svg/logo.svg" alt="Brokage Hub Logo" style="height:48px;"></a> 
+      <ul class="nav-menu">
+        <li><a href="{% url 'homepage' %}">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">Why Us</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a class="btn" style="color:#FFD700;" href="{% url 'register' %}">JoinNow</a></li>
+      </ul>
+      <div class="hamburger" aria-label="Open navigation" tabindex="0">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </div>
+    </div>
+  </nav>
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div class="hero-content" data-aos="fade-up">
+      <h1>Empowering Your <span class="highlight">Financial Future.</span></h1>
+      <p>We provide comprehensive financial solutions—from payroll and accounting to strategic consulting—to help your business thrive.</p>
+      <a href="form.html" class="btn">Get Started?</a>
+    </div>
+  </section>
+  <!-- Services -->
+  <section id="services" class="section">
+    <h2 class="section-title" data-aos="fade-right">Our Expertise</h2>
+    <div class="services-grid">
+      
+      {% if serv %}
+        
+        {% for sv in serv %}
+        
+        <div class="service-card" data-aos="fade-up">
+          <h3>{{sv.title}}</h3>
+          <ul>
+            <li>{{sv.item1}}</li>
+            <li>{{sv.item2}}</li>
+            <li>{{sv.item3}}</li>
+            <li>{{sv.item4}}</li>
+
+          </ul>
+        </div>
+        {% endfor %}
+          
+      {% endif %}
+        
+      
+    </div>
+  </section>
+  <!-- Why Us -->
+  <section id="about" class="section">
+    <h2 class="section-title" data-aos="fade-right">Why Choose Us?</h2>
+    <div class="features-grid">
+      
+      {% if chosen %}
+        
+        {% for c in chosen %}
+        <div class="feature-card" data-aos="zoom-in" data-aos-delay="{{c.delay}}">
+          <div class="feature-icon">
+            <!-- Lock Icon -->
+            {{c.svg|safe}}
+          </div>
+          <h3>{{c.title|title}}</h3>
+          <p>{{c.item}}</p>
+        </div>
+        
+        {% endfor %}
+          
+      {% endif %}
+        
+    </div>
+  </section>
+  <!-- Testimonials -->
+  <section id="testimonials" class="section">
+    <h2 class="section-title" data-aos="fade-right">What Our Clients Say</h2>
+    <div class="testimonial-grid">
+     
+     {% if test %}
+      
+      {% for ts in test %}
+      
+      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="{{ts.delay}}">
+        <p class="testimonial-text">"{{ts.text}}"</p>
+        <p class="testimonial-author">— {{ts.author}}</p>
+      </div>
+      {% endfor %}
+        
+     {% endif %}
+      
+    </div>
+  </section>
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <h2 class="section-title" data-aos="fade-up">Get in Touch</h2>
+    <p data-aos="fade-up" data-aos-delay="100">Have a question or want to get started? Our inbox is always open. Whether you have a question or just want to say hi, we’ll try our best to get back to you!</p>
+    <div data-aos="fade-up" data-aos-delay="200">
+      <a href="mailto:{{hub.email}}" class="btn">Say Hello</a>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Designed & Built by {{hub.name|title}}&nbsp;Team</p>
+    <p>&copy; 2023 {{hub.name|title}}. All Rights Reserved.</p>
+  </footer>
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script src="{% static '' %}js/index.js"></script>
+</body>
+</html>
