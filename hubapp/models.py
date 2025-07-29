@@ -20,6 +20,9 @@ class CompanyProfile(models.Model):
     favicon = models.TextField()
     email = models.EmailField()
     phone = models.CharField(max_length=50)
+    telegram_link = models.CharField(max_length=80)
+
+
 
 
         
