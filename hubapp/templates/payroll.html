@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payroll Management | Brokage Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="icon" type="image/svg+xml" href="{% static '' %}svg/favicon.svg">
+  <link rel="stylesheet" href="{% static '' %}css/index.css"> 
+  <style>
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      background: #0a192f;
+      color: #ccd6f6;
+      margin: 0;
+      padding: 0;
+    }
+    .section-title {
+      color: #FFD700;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .payroll-container {
+      max-width: 900px;
+      margin: 4rem auto 2rem auto;
+      background: rgba(10,25,47,0.95);
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(100,255,218,0.08);
+      padding: 2.5rem 2rem;
+      position: relative;
+      z-index: 2;
+    }
+    .payroll-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .payroll-header h1 {
+      font-size: 2.2rem;
+      color: #64ffda;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .payroll-header p {
+      color: #8892b0;
+      font-size: 1.1rem;
+      margin-bottom: 0;
+    }
+    .payroll-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin: 2.5rem 0;
+      justify-content: center;
+    }
+    .payroll-feature-card {
+      background: #112240;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(100,255,218,0.06);
+      padding: 1.5rem 1.2rem;
+      min-width: 260px;
+      max-width: 340px;
+      flex: 1 1 260px;
+      color: #fff;
+      transition: transform 0.2s;
+    }
+    .payroll-feature-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 8px 32px rgba(100,255,218,0.15);
+    }
+    .payroll-feature-card h3 {
+      color: #FFD700;
+      font-size: 1.2rem;
+      margin-bottom: 0.7rem;
+      font-weight: 600;
+    }
+    .payroll-feature-card ul {
+      padding-left: 1.2rem;
+      margin: 0;
+      color: #ccd6f6;
+    }
+    .payroll-feature-card li {
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+    .payroll-benefits {
+      margin: 2.5rem 0 1.5rem 0;
+      background: #0a192f;
+      border-radius: 12px;
+      padding: 1.5rem 1rem;
+      box-shadow: 0 2px 8px rgba(100,255,218,0.05);
+    }
+    .payroll-benefits h2 {
+      color: #64ffda;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      text-align: center;
+    }
+    .payroll-benefits ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      max-width: 500px;
+    }
+    .payroll-benefits li {
+      margin-bottom: 1rem;
+      font-size: 1.08rem;
+      display: flex;
+      align-items: center;
+      color: #FFD700;
+    }
+    .payroll-benefits li span {
+      font-size: 1.3rem;
+      margin-right: 0.7rem;
+      color: #64ffda;
+    }
+    .btn {
+      background: #64ffda;
+      color: #0a192f !important;
+      border: none;
+      border-radius: 6px;
+      padding: 0.8rem 2.2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      margin: 2rem auto 0 auto;
+      display: block;
+      text-align: center;
+      transition: background 0.2s, color 0.2s;
+      box-shadow: 0 2px 8px rgba(100,255,218,0.08);
+    }
+    .btn:hover {
+      background: #FFD700;
+      color: #0a192f !important;
+    }
+    @media (max-width: 700px) {
+      .payroll-container {
+        padding: 1.2rem 0.5rem;
+      }
+      .payroll-features {
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated Background -->
+  <div class="bg-animated">
+    <div class="bg-shape bg-shape1"></div>
+    <div class="bg-shape bg-shape2"></div>
+    <div class="bg-shape bg-shape3"></div>
+  </div>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      {% comment %} <a href="#home" class="logo"><img src="{% static '' %}svg/logo.svg" alt="Brokage Hub Logo" style="height:48px;"></a> {% endcomment %}
+      <a class="btn" style="color:#fff; padding: 0.5rem 1rem;" href="#" onclick="history.back()">← Back to Previous Page</a>
+    </div>
+  </nav>
+  <!-- Main Content -->
+  <section class="payroll-container" data-aos="fade-up">
+    <div class="payroll-header">
+      <h1>Payroll Management Made Simple</h1>
+      <p>We take the hassle out of payroll by making sure your employees are paid accurately and on time—salaries, benefits, taxes, and all. From calculations and deductions to pay stubs and records, we handle it end-to-end.</p>
+    </div>
+    <div class="payroll-features">
+      <div class="payroll-feature-card" data-aos="fade-up">
+        <h3>What We Do</h3>
+        <ul>
+          <li>Calculate salaries, deductions, and taxes</li>
+          <li>Process payroll with direct deposits or checks</li>
+          <li>Generate electronic pay stubs</li>
+          <li>Keep employee records updated</li>
+        </ul>
+      </div>
+      <div class="payroll-feature-card" data-aos="fade-up" data-aos-delay="100">
+        <h3>Stay Tax Compliant</h3>
+        <ul>
+          <li>Tax withholdings and reporting (W-2s, 1099s)</li>
+          <li>Timely filings so you don’t have to worry</li>
+        </ul>
+      </div>
+      <div class="payroll-feature-card" data-aos="fade-up" data-aos-delay="200">
+        <h3>Employee Self-Service</h3>
+        <ul>
+          <li>Secure access to pay stubs, benefits, and personal info anytime</li>
+        </ul>
+      </div>
+      <div class="payroll-feature-card" data-aos="fade-up" data-aos-delay="300">
+        <h3>Direct Deposit</h3>
+        <ul>
+          <li>Fast, accurate, and secure payments straight to employee accounts</li>
+        </ul>
+      </div>
+    </div>
+    <div class="payroll-benefits" data-aos="fade-up" data-aos-delay="200">
+      <h2>Why Outsource Payroll?</h2>
+      <ul>
+        <li><span>✔</span>Save time and focus on growth</li>
+        <li><span>✔</span>Ensure accuracy and compliance</li>
+        <li><span>✔</span>Keep employees happy with easy access to their info</li>
+      </ul>
+    </div>
+    <a href="form.html" class="btn">Get Payroll Help</a>
+  </section>
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Designed & Built by {{hub.name|title}}&nbsp;Team</p>
+    <p>&copy; 2021{{hub.name|title}}&nbsp;Team. All Rights Reserved.</p>
+  </footer>
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+  <script src="{% static '' %}js/index.js"></script>
+</body>
+</html>

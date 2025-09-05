@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Consulting | Brokage Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="icon" type="image/svg+xml" href="{% static '' %}svg/favicon.svg">
+  <link rel="stylesheet" href="{% static '' %}css/index.css"> 
+  <style>
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      background: #0a192f;
+      color: #ccd6f6;
+      margin: 0;
+      padding: 0;
+    }
+    .section-title {
+      color: #FFD700;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .consulting-container {
+      max-width: 900px;
+      margin: 4rem auto 2rem auto;
+      background: rgba(10,25,47,0.95);
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(100,255,218,0.08);
+      padding: 2.5rem 2rem;
+      position: relative;
+      z-index: 2;
+    }
+    .consulting-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .consulting-header h1 {
+      font-size: 2.2rem;
+      color: #64ffda;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .consulting-header p {
+      color: #8892b0;
+      font-size: 1.1rem;
+      margin-bottom: 0;
+    }
+    .consulting-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin: 2.5rem 0;
+      justify-content: center;
+    }
+    .consulting-feature-card {
+      background: #112240;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(100,255,218,0.06);
+      padding: 1.5rem 1.2rem;
+      min-width: 260px;
+      max-width: 340px;
+      flex: 1 1 260px;
+      color: #fff;
+      transition: transform 0.2s;
+    }
+    .consulting-feature-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 8px 32px rgba(100,255,218,0.15);
+    }
+    .consulting-feature-card h3 {
+      color: #FFD700;
+      font-size: 1.2rem;
+      margin-bottom: 0.7rem;
+      font-weight: 600;
+    }
+    .consulting-feature-card ul {
+      padding-left: 1.2rem;
+      margin: 0;
+      color: #ccd6f6;
+    }
+    .consulting-feature-card li {
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+    .consulting-benefits {
+      margin: 2.5rem 0 1.5rem 0;
+      background: #0a192f;
+      border-radius: 12px;
+      padding: 1.5rem 1rem;
+      box-shadow: 0 2px 8px rgba(100,255,218,0.05);
+    }
+    .consulting-benefits h2 {
+      color: #64ffda;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      text-align: center;
+    }
+    .consulting-benefits ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      max-width: 500px;
+    }
+    .consulting-benefits li {
+      margin-bottom: 1rem;
+      font-size: 1.08rem;
+      display: flex;
+      align-items: center;
+      color: #FFD700;
+    }
+    .consulting-benefits li span {
+      font-size: 1.3rem;
+      margin-right: 0.7rem;
+      color: #64ffda;
+    }
+    .btn {
+      background: #64ffda;
+      color: #0a192f !important;
+      border: none;
+      border-radius: 6px;
+      padding: 0.8rem 2.2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      margin: 2rem auto 0 auto;
+      display: block;
+      text-align: center;
+      transition: background 0.2s, color 0.2s;
+      box-shadow: 0 2px 8px rgba(100,255,218,0.08);
+    }
+    .btn:hover {
+      background: #FFD700;
+      color: #0a192f !important;
+    }
+    @media (max-width: 700px) {
+      .consulting-container {
+        padding: 1.2rem 0.5rem;
+      }
+      .consulting-features {
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated Background -->
+  <div class="bg-animated">
+    <div class="bg-shape bg-shape1"></div>
+    <div class="bg-shape bg-shape2"></div>
+    <div class="bg-shape bg-shape3"></div>
+  </div>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      {% comment %} <a href="#home" class="logo"><img src="{% static '' %}svg/logo.svg" alt="Brokage Hub Logo" style="height:48px;"></a> {% endcomment %}
+      <a class="btn" style="color:#fff; padding: 0.5rem 1rem;" href="#" onclick="history.back()">← Back to Previous Page</a>
+    </div>
+  </nav>
+  <!-- Main Content -->
+  <section class="consulting-container" data-aos="fade-up">
+    <div class="consulting-header">
+      <h1>Financial Consulting</h1>
+      <p>Take the guesswork out of money management. We’ll guide you with clear strategies to grow, protect, and manage your finances.</p>
+    </div>
+    <div class="consulting-features">
+      <div class="consulting-feature-card" data-aos="fade-up">
+        <h3>Budgeting & Forecasting</h3>
+        <ul>
+          <li>Plan with confidence—set realistic budgets</li>
+          <li>Forecast future trends</li>
+          <li>Stay on track with smart financial monitoring</li>
+        </ul>
+      </div>
+      <div class="consulting-feature-card" data-aos="fade-up" data-aos-delay="100">
+        <h3>Financial Insights</h3>
+        <ul>
+          <li>Understand your numbers</li>
+          <li>Break down financial statements</li>
+          <li>Track key metrics and highlight growth opportunities</li>
+        </ul>
+      </div>
+      <div class="consulting-feature-card" data-aos="fade-up" data-aos-delay="200">
+        <h3>Cash Flow Made Simple</h3>
+        <ul>
+          <li>Know what’s coming in and going out</li>
+          <li>Forecast, manage, and smooth out your cash flow</li>
+          <li>Always be prepared</li>
+        </ul>
+      </div>
+      <div class="consulting-feature-card" data-aos="fade-up" data-aos-delay="300">
+        <h3>Smart Investment Strategies</h3>
+        <ul>
+          <li>Set goals and build portfolios</li>
+          <li>Manage investments to fit your vision and comfort level</li>
+        </ul>
+      </div>
+    </div>
+    <div class="consulting-benefits" data-aos="fade-up" data-aos-delay="200">
+      <h2>Why Choose Us</h2>
+      <ul>
+        <li><span>✔</span>Make confident financial decisions</li>
+        <li><span>✔</span>Boost performance and profitability</li>
+        <li><span>✔</span>Build lasting financial stability</li>
+      </ul>
+    </div>
+    <a href="{% url 'register' %}" class="btn">Get Financial Guidance</a>
+  </section>
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Designed & Built by {{hub.name|title}}&nbsp;Team</p>
+    <p>&copy; 2021{{hub.name|title}}&nbsp;Team. All Rights Reserved.</p>
+  </footer>
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+  <script src="{% static '' %}js/index.js"></script>
+</body>
+</html>

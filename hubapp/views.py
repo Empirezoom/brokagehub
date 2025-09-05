@@ -132,3 +132,27 @@ def detail(request,reference_id,id):
     }
 
     return render(request,'detail.html',context)
+
+
+
+
+
+def payroll(request):
+    return render(request, 'payroll.html')
+
+def book_keeping(request):
+    return render(request, 'book_keeping.html')
+
+def financial(request):
+    return render(request, 'financial.html')
+
+def tax_planning(request):
+    return render(request, 'tax_planning.html')
+
+def business_incorporation(request):
+    return render(request, 'business_incorporation.html')
+
+def compliance(request):
+    return render(request, 'compliance.html')
+
+

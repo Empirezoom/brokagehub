@@ -1,14 +1,292 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html lang="en"> 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Brokage Hub - Your Trusted Financial Partner</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
   <link rel="icon" type="image/svg+xml" href="{% static '' %}svg/favicon.svg">
-  <link rel="stylesheet" href="{% static '' %}css/index.css"> 
+  <link rel="stylesheet" href="{% static '' %}css/index.css">
+  <style>
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      background: #0a192f;
+      color: #ccd6f6;
+      margin: 0;
+      padding: 0;
+    }
+    .section-title {
+      color: #FFD700;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    /* Hero Typewriter */
+    .typewriter {
+      color: #FFD700;
+      font-weight: 700;
+    }
+    /* Stats Section */
+    .stats-grid {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin: 2rem 0;
+    }
+    .stat-card {
+      background: #112240;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(100,255,218,0.08);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      min-width: 150px;
+      transition: box-shadow 0.2s;
+    }
+    .stat-card:hover {
+      box-shadow: 0 8px 32px rgba(100,255,218,0.18);
+    }
+    .counter {
+      color: #FFD700;
+      font-size: 2.5rem;
+      font-weight: 700;
+      display: block;
+    }
+    /* Skills/Expertise Bars */
+    .skills-bars {
+      max-width: 600px;
+      margin: 2rem auto;
+    }
+    .skill {
+      margin-bottom: 1.5rem;
+    }
+    .skill span {
+      color: #FFD700;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .progress-bar-bg {
+      background: #112240;
+      border-radius: 8px;
+      height: 16px;
+      width: 100%;
+      overflow: hidden;
+    }
+    .progress-bar {
+      background: linear-gradient(90deg, #64ffda 60%, #FFD700 100%);
+      height: 100%;
+      width: 0;
+      border-radius: 8px;
+      transition: width 1.5s cubic-bezier(.4,0,.2,1);
+    }
+    /* FAQ Accordion */
+    .faq-list {
+      max-width: 700px;
+      margin: 2rem auto;
+    }
+    .faq-item {
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      background: #112240;
+      box-shadow: 0 2px 8px rgba(100,255,218,0.06);
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: #FFD700;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 1rem;
+      text-align: left;
+      cursor: pointer;
+      outline: none;
+      transition: background 0.2s;
+    }
+    .faq-question:hover {
+      background: #0a192f;
+    }
+    .faq-answer {
+      display: none;
+      color: #ccd6f6;
+      padding: 0 1rem 1rem 1rem;
+      font-size: 1rem;
+      border-top: 1px solid #233554;
+    }
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+    /* Microinteractions */
+    .btn {
+      position: relative;
+      overflow: hidden;
+      background: #64ffda;
+      color: #0a192f !important;
+      border: none;
+      border-radius: 6px;
+      padding: 0.8rem 2.2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      margin: 2rem auto 0 auto;
+      display: inline-block;
+      text-align: center;
+      transition: background 0.2s, color 0.2s;
+      box-shadow: 0 2px 8px rgba(100,255,218,0.08);
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #FFD700;
+      color: #0a192f !important;
+    }
+    .btn::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255,215,0,0.3);
+      border-radius: 100%;
+      transform: translate(-50%, -50%);
+      transition: width 0.4s ease, height 0.4s ease, opacity 0.6s;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .btn:active::after {
+      width: 200px;
+      height: 200px;
+      opacity: 1;
+      transition: 0s;
+    }
+    .service-card, .testimonial-card {
+      background: #112240;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(100,255,218,0.08);
+      padding: 1.5rem 1.2rem;
+      min-width: 260px;
+      max-width: 340px;
+      flex: 1 1 260px;
+      color: #fff;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .service-card:hover, .testimonial-card:hover {
+      box-shadow: 0 8px 32px rgba(100,255,218,0.18);
+      transform: translateY(-4px) scale(1.02);
+    }
+    /* Swiper Carousel */
+    .swiper {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .swiper-pagination-bullet {
+      background: #FFD700;
+      opacity: 0.7;
+    }
+    .swiper-pagination-bullet-active {
+      background: #64ffda;
+      opacity: 1;
+    }
+    @media (max-width: 900px) {
+      .stats-grid { flex-direction: column; align-items: center; }
+      .skills-bars { width: 95%; }
+    }
+    @media (max-width: 700px) {
+      .service-card, .testimonial-card { min-width: 90%; max-width: 100%; }
+      .skills-bars { width: 100%; }
+    }
+    .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  margin: 2rem 0;
+}
+@media (max-width: 700px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+}
+
+
+
+/* Shield rotation animation on page load, then pulse on hover */
+/* 
+@keyframes rotateShield {
+  from { transform: rotate(0deg);}
+  to { transform: rotate(360deg);}
+}
+@keyframes pulseShield {
+  0% { transform: scale(1);}
+  50% { transform: scale(1.08);}
+  100% { transform: scale(1);}
+}
+.logo-anim svg {
+  transition: transform 0.3s;
+}
+.logo-anim.rotating svg {
+  animation: rotateShield 5s linear 1;
+}
+.logo-anim.pulse svg {
+  animation: pulseShield 0.8s infinite;
+}
+*/
+
+
+
+
+
+
+
+
+
+ /*Shield "Draw" Animation (Recommended for Professional Look) */
+#shieldPath {
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+  animation: drawShield 1.5s ease-out forwards;
+}
+@keyframes drawShield {
+  to { stroke-dashoffset: 0; }
+}
+#shieldB {
+  animation: fadeInB 1s 1.2s forwards;
+}
+@keyframes fadeInB {
+  to { opacity: 1; }
+}
+  
+
+/*Shield Glow Pulse Animation */
+#shieldLogo {
+  animation: pulseGlow 2s cubic-bezier(.4,0,.2,1) 2;
+}
+@keyframes pulseGlow {
+  0% { filter: drop-shadow(0 0 0px #FFD700); transform: scale(1);}
+  30% { filter: drop-shadow(0 0 12px #FFD700); transform: scale(1.08);}
+  60% { filter: drop-shadow(0 0 0px #FFD700); transform: scale(1);}
+  100% { filter: none; transform: scale(1);}
+} 
+
+
+
+/* Letter "B" Pop-In with Bounce*/
+#shieldB {
+  animation: popB 0.8s 0.7s cubic-bezier(.2,1.5,.5,1) forwards;
+}
+@keyframes popB {
+  0% { opacity: 0; transform: scale(0.5);}
+  60% { opacity: 1; transform: scale(1.15);}
+  80% { opacity: 1; transform: scale(0.95);}
+  100% { opacity: 1; transform: scale(1);}
+}
+
+  </style>
 </head>
 <body>
   <!-- Animated Background -->
@@ -20,9 +298,40 @@
   <!-- Navbar -->
   <nav class="navbar">
     <div class="nav-container">
-      <a href="#home" class="logo"><img src="{% static '' %}svg/logo.svg" alt="Brokage Hub Logo" style="height:48px;"></a> 
+     
+
+    <a href="#home" class="logo" style="height: 48px;">
+      <svg id="shieldLogo" width="220" height="60" viewBox="0 0 220 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path id="shieldPath"
+          d="M40 54s28-14 28-35V13L40 4 12 13v6c0 21 28 35 28 35z"
+          fill="#64ffda"
+          fill-opacity="0.18"
+          stroke="#FFD700"
+          stroke-width="2"
+        />
+        <text id="shieldB"
+          x="40" y="40"
+          text-anchor="middle"
+          font-family="Poppins, Arial, sans-serif"
+          font-size="32"
+          font-weight="bold"
+          fill="#FFD700"
+          style="opacity:0; transform: scale(0.5);"
+        >B</text>
+
+        <text x="70" y="38" font-family="Poppins, Arial, sans-serif" font-size="32" font-weight="bold" fill="#64ffda">Brokers</text>
+          <text x="70" y="56" font-family="Poppins, Arial, sans-serif" font-size="18" font-weight="600" fill="#FFD700">Hub</text>
+      </svg>
+    </a>
+
+
+
+
+
+
+
       <ul class="nav-menu">
-        <li><a href="{% url 'homepage' %}">Home</a></li>
+        <li><a href="#home">Home</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#about">Why Us</a></li>
         <li><a href="#testimonials">Testimonials</a></li>
@@ -37,127 +346,333 @@
   <!-- Hero -->
   <section id="home" class="hero">
     <div class="hero-content" data-aos="fade-up">
-      <h1>Empowering Your <span class="highlight">Financial Future.</span></h1>
+      <h1>
+        Empowering Your <span class="highlight typewriter"></span>
+      </h1>
       <p>We provide comprehensive financial solutions—from payroll and accounting to strategic consulting—to help your business thrive.</p>
-      <a href="{% url 'register' %}" class="btn">Get Started?</a>
+      <a href="{% url 'register' %}" class="btn">Get Started</a>
+    </div>
+  </section>
+  <!-- Stats Section -->
+  <section class="stats-section section" data-aos="fade-up">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="counter" data-target="500">0</span>
+        <p>Clients Served</p>
+      </div>
+      <div class="stat-card">
+        <span class="counter" data-target="1200">0</span>
+        <p>Tax Returns Filed</p>
+      </div>
+      <div class="stat-card">
+        <span class="counter" data-target="15">0</span>
+        <p>Years Experience</p>
+      </div>
     </div>
   </section>
   <!-- Services -->
   <section id="services" class="section">
     <h2 class="section-title" data-aos="fade-right">Our Expertise</h2>
     <div class="services-grid">
-      
-      {% if serv %}
-        
-        {% for sv in serv %}
-        
-        <div class="service-card" data-aos="fade-up">
-          <h3>{{sv.title}}</h3>
-          <ul>
-            <li>{{sv.item1}}</li>
-            <li>{{sv.item2}}</li>
-            <li>{{sv.item3}}</li>
-            <li>{{sv.item4}}</li>
-
-          </ul>
+      <div class="service-card" data-aos="fade-up">
+        <h3>Payroll Management</h3>
+        <ul>
+          <li>End-to-end payroll processing</li>
+          <li>Tax compliance and reporting</li>
+          <li>Employee self-service portals</li>
+        </ul>
+        <br>
+        <a href="{% url 'payroll' %}" class="btn" style="margin-top: auto; text-align: center;">Learn More</a>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+        <h3>Bookkeeping & Accounting</h3>
+        <ul>
+          <li>General ledger management</li>
+          <li>Financial statement preparation</li>
+          <li>Reconciliation and audits</li>
+        </ul>
+        <br>
+        <a href="{% url 'book_keeping' %}" class="btn" style="margin-top: auto; text-align: center;">Learn More</a>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+        <h3>Financial Consulting</h3>
+        <ul>
+          <li>Budgeting and forecasting</li>
+          <li>Cash flow management</li>
+          <li>Investment strategy consulting</li>
+        </ul>
+        <br>
+        <a href="{% url 'financial' %}" class="btn" style="margin-top: auto; text-align: center;">Learn More</a>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+        <h3>Tax Planning & Preparation</h3>
+        <ul>
+          <li>Individual and corporate tax filings</li>
+          <li>Strategic tax planning</li>
+          <li>Investment strategy consulting</li>
+        </ul>
+        <br>
+        <a href="{% url 'tax_planning' %}" class="btn" style="margin-top: auto; text-align: center;">Learn More</a>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+        <h3>Business Incorporation Services</h3>
+        <ul>
+          <li>Business entity formation</li>
+          <li>EIN registration</li>
+          <li>Investment strategy consulting</li>
+        </ul>
+        <br>
+        <a href="{% url 'business_incorporation' %}" class="btn" style="margin-top: auto; text-align: center;">Learn More</a>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+        <h3>Compliance & Reporting</h3>
+        <ul>
+          <li>Audit support and documentation</li>
+          <li>Statutory financial reporting</li>
+          <li>Investment strategy consulting</li>
+        </ul>
+        <br>
+        <a href="{% url 'compliance' %}" class="btn" style="margin-top: auto; text-align: center;">Learn More</a>
+      </div>
+    </div>
+  </section>
+  <!-- Skills/Expertise Bars -->
+  <section class="skills-section section" data-aos="fade-up">
+    <h2 class="section-title">Our Expertise</h2>
+    <div class="skills-bars">
+      <div class="skill">
+        <span>Payroll Management</span>
+        <div class="progress-bar-bg">
+          <div class="progress-bar" data-width="95%"></div>
         </div>
-        {% endfor %}
-          
-      {% endif %}
-        
-      
+      </div>
+      <div class="skill">
+        <span>Bookkeeping & Accounting</span>
+        <div class="progress-bar-bg">
+          <div class="progress-bar" data-width="90%"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <span>Tax Planning</span>
+        <div class="progress-bar-bg">
+          <div class="progress-bar" data-width="92%"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <span>Financial Consulting</span>
+        <div class="progress-bar-bg">
+          <div class="progress-bar" data-width="88%"></div>
+        </div>
+      </div>
     </div>
   </section>
   <!-- Why Us -->
   <section id="about" class="section">
     <h2 class="section-title" data-aos="fade-right">Why Choose Us?</h2>
     <div class="features-grid">
-      
-      {% if chosen %}
-        
-        {% for c in chosen %}
-        <div class="feature-card" data-aos="zoom-in" data-aos-delay="{{c.delay}}">
-          <div class="feature-icon">
-            <!-- Lock Icon -->
-            {{c.svg|safe}}
-          </div>
-          <h3>{{c.title|title}}</h3>
-          <p>{{c.item}}</p>
+      <div class="feature-card" data-aos="zoom-in">
+        <div class="feature-icon">
+          <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 38s16-8 16-20V8L12 2 4 8v10c0 12 16 20 16 20z"></path></svg>
         </div>
-        
-        {% endfor %}
-          
-      {% endif %}
-        
+        <h3>Experienced Professionals</h3>
+        <p>A team of certified experts with proven track records.</p>
+      </div>
+      <div class="feature-card" data-aos="zoom-in" data-aos-delay="100">
+        <div class="feature-icon">
+          <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="14" r="8"></circle><path d="M2 38v-2a8 8 0 0 1 8-8h20a8 8 0 0 1 8 8v2"></path></svg>
+        </div>
+        <h3>Custom Solutions</h3>
+        <p>Tailored services that align with your business goals.</p>
+      </div>
+      <div class="feature-card" data-aos="zoom-in" data-aos-delay="200">
+        <div class="feature-icon">
+          <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="22" width="24" height="14" rx="4" ry="4"></rect><path d="M16 22v-6a8 8 0 0 1 16 0v6"></path></svg>
+        </div>
+        <h3>Secure & Confidential</h3>
+        <p>State-of-the-art data security practices.</p>
+      </div>
     </div>
   </section>
-  <!-- Testimonials -->
+  <!-- Testimonials Carousel -->
   <section id="testimonials" class="section">
     <h2 class="section-title" data-aos="fade-right">What Our Clients Say</h2>
-    <div class="testimonial-grid">
-     
-     {% if test %}
-      
-      {% for ts in test %}
-      
-      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="{{ts.delay}}">
-        <p class="testimonial-text">"{{ts.text}}"</p>
-        <p class="testimonial-author">— {{ts.author}}</p>
+    <div class="swiper testimonials-swiper" data-aos="fade-up">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide testimonial-card">
+          <p class="testimonial-text">"Brokage Hub helped us set up a robust payroll system that saved us hours every month. Their professionalism is unmatched."</p>
+          <p class="testimonial-author">— Daniel T., CEO</p>
+        </div>
+        <div class="swiper-slide testimonial-card">
+          <p class="testimonial-text">"Their consulting team provided insights that transformed our financial planning. Highly recommended!"</p>
+          <p class="testimonial-author">— Sarah K., CFO</p>
+        </div>
+        <div class="swiper-slide testimonial-card">
+          <p class="testimonial-text">"Excellent support and clear communication throughout our audit process."</p>
+          <p class="testimonial-author">— Michael A., HR Director</p>
+        </div>
+        <div class="swiper-slide testimonial-card">
+          <p class="testimonial-text">"I've used many platforms, but Brokers Hub stands out for its professional design and reliable performance. It's been a game-changer for our business."</p>
+          <p class="testimonial-author">— Kevin P., Financial Consultant</p>
+        </div>
+        <div class="swiper-slide testimonial-card">
+          <p class="testimonial-text">"Finally, a platform that understands regulatory requirements. Brokers Hub made our compliance documentation process smooth and worry-free."</p>
+          <p class="testimonial-author">— 	Lisa C., Compliance Officer</p>
+        </div>
+        <div class="swiper-slide testimonial-card">
+          <p class="testimonial-text">"Brokers Hub exceeded our expectations. The platform is modern, efficient, and their customer service is outstanding. Highly recommended!"</p>
+          <p class="testimonial-author">— Mark S., Branch Manager</p>
+        </div>
+        <div class="swiper-slide testimonial-card">
+          <p class="testimonial-text">"The registration process was seamless and secure. Brokage Hub's attention to detail and user-friendly interface made onboarding our entire team effortless."</p>
+          <p class="testimonial-author">— Sarah M., Operations Manager</p>
+        </div>
+        <div class="swiper-slide testimonial-card">
+          <p class="testimonial-text">"Brokers Hub transformed our workflow completely. The platform is intuitive, reliable, and has significantly improved our operational efficiency."</p>
+          <p class="testimonial-author">— 	Jennifer L., Finance Director</p>
+        </div>
+        <div class="swiper-slide testimonial-card">
+          <p class="testimonial-text">"The documentation process through Brokage Hub is straightforward and professional. It's exactly what we needed to streamline our client registration."</p>
+          <p class="testimonial-author">— Amanda R., Portfolio Manager</p>
+        </div>
       </div>
-      {% endfor %}
-        
-     {% endif %}
-      
+      <div class="swiper-pagination"></div>
     </div>
   </section>
-  {% comment %} <!-- Contact -->
+  <!-- FAQ Accordion -->
+  <section class="faq-section section" data-aos="fade-up">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question">How do I get started with Brokage Hub?</button>
+        <div class="faq-answer">Simply click the "Get Started" button and fill out our form. Our team will reach out to guide you through the next steps.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Is my financial data secure?</button>
+        <div class="faq-answer">Absolutely. We use state-of-the-art security practices to keep your data safe and confidential.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Can you help with both personal and business taxes?</button>
+        <div class="faq-answer">Yes, we offer tax planning and preparation for individuals and businesses alike.</div>
+      </div>
+    </div>
+  </section>
+  <!-- Contact -->
   <section id="contact" class="section">
     <h2 class="section-title" data-aos="fade-up">Get in Touch</h2>
     <p data-aos="fade-up" data-aos-delay="100">Have a question or want to get started? Our inbox is always open. Whether you have a question or just want to say hi, we’ll try our best to get back to you!</p>
     <div data-aos="fade-up" data-aos-delay="200">
-      <a href="{{hub.telegram_link}}" class="btn" style="color: azure;">
-            <span class="telegram-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-.14.06-.19.1-.09.08-1.4.89-3.95 2.62-.37.27-.71.4-1.01.39-.33-.01-.97-.19-1.44-.35-.58-.2-1.04-.31-1-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.37.08 0 .27.02.39.12.1.08.12.19.14.27.01.06.03.2.01.31z"/>
-          </svg>
-        </span>
-        Telegram
-      </a>
-      <a href="mailto:{{hub.email}}" class="btn" style="color: azure;">Mail&nbsp;✉</a>
-      <a href="tell:{{hub.phone}}" class="btn" style="color: azure;">📞Tell</a>
-      
-
-    </div>
-  </section> {% endcomment %}
-
-
-
-
-   <!-- Contact Section Only -->
-  <section id="contact" class="section">
-    <h2 class="section-title">Get in Touch</h2>
-    <p>Have a question or want to get started? Our inbox is always open. Whether you have a question or just want to say hi, we'll try our best to get back to you!</p>
-    
-    <div class="contact-buttons">
-      <a href="{{hub.telegram_link}}" class="contact-btn telegram">
-        <span class="telegram-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-.14.06-.19.1-.09.08-1.4.89-3.95 2.62-.37.27-.71.4-1.01.39-.33-.01-.97-.19-1.44-.35-.58-.2-1.04-.31-1-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.37.08 0 .27.02.39.12.1.08.12.19.14.27.01.06.03.2.01.31z"/>
-          </svg>
-        </span>
-        Telegram
-      </a>
-      <a href="mailto:{{hub.email}}" class="contact-btn mail">Mail ✉</a>
-      <a href="tel:{{hub.phone}}" class="contact-btn phone">📞 Call</a>
+      <a href="form.html" class="btn" style="color: azure;">💎ᴠɪᴘ</a>
+      <a href="mailto:contact@brokagehub.com" class="btn" style="color: azure;">Mail&nbsp;✉</a>
+      <a href="tel:+1234567890" class="btn" style="color: azure;">📞Tell</a>
     </div>
   </section>
   <!-- Footer -->
   <footer class="footer">
     <p>Designed & Built by {{hub.name|title}}&nbsp;Team</p>
-    <p>&copy; 2023 {{hub.name|title}}. All Rights Reserved.</p>
+    <p>&copy; 2021{{hub.name|title}}&nbsp;Team. All Rights Reserved.</p>
   </footer>
   <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-<script src="{% static '' %}js/index.js"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    // Typed.js Typewriter
+    var typed = new Typed('.typewriter', {
+      strings: ['Financial Future.', 'Business Growth.', 'Peace of Mind.'],
+      typeSpeed: 60,
+      backSpeed: 30,
+      backDelay: 1500,
+      loop: true
+    });
+
+    // Counter Animation
+    function animateCounter(counter) {
+      const target = +counter.getAttribute('data-target');
+      const speed = 200;
+      const update = () => {
+        const current = +counter.innerText;
+        const inc = Math.ceil(target / speed);
+        if (current < target) {
+          counter.innerText = current + inc;
+          setTimeout(update, 20);
+        } else {
+          counter.innerText = target;
+        }
+      };
+      update();
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      const counters = document.querySelectorAll('.counter');
+      counters.forEach(counter => {
+        function checkAndAnimate() {
+          const rect = counter.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0 && counter.innerText === "0") {
+            animateCounter(counter);
+            window.removeEventListener('scroll', checkAndAnimate);
+          }
+        }
+        window.addEventListener('scroll', checkAndAnimate);
+        checkAndAnimate();
+      });
+    });
+
+    // Swiper Carousel
+    var swiper = new Swiper('.testimonials-swiper', {
+      loop: true,
+      autoplay: { delay: 2000 },
+      pagination: { el: '.swiper-pagination', clickable: true },
+      slidesPerView: 3,
+      spaceBetween: 30,
+      effect: 'slide'
+    });
+
+    // Animate Progress Bars
+    function animateBars() {
+      document.querySelectorAll('.progress-bar').forEach(bar => {
+        const rect = bar.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0 && bar.style.width === "0px") {
+          bar.style.width = bar.getAttribute('data-width');
+        }
+      });
+    }
+    window.addEventListener('scroll', animateBars);
+    window.addEventListener('DOMContentLoaded', animateBars);
+
+    // FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const item = this.parentElement;
+        item.classList.toggle('active');
+        document.querySelectorAll('.faq-item').forEach(other => {
+          if (other !== item) other.classList.remove('active');
+        });
+      });
+    });
+
+    // AOS Init
+    AOS.init();
+  </script>
+
+{% comment %} <script>
+  // Shield rotation animation on page load, then pulse on hover
+  window.addEventListener('DOMContentLoaded', function() {
+    var logo = document.querySelector('.logo-anim');
+    if(logo) {
+      logo.classList.add('rotating');
+      setTimeout(function() {
+        logo.classList.remove('rotating');
+        // Enable pulse on hover after rotation
+        logo.addEventListener('mouseenter', function() {
+          logo.classList.add('pulse');
+        });
+        logo.addEventListener('mouseleave', function() {
+          logo.classList.remove('pulse');
+        });
+      }, 5000);
+    }
+  });
+</script> {% endcomment %}
+
+  <script src="{% static '' %}js/index.js"></script>
 </body>
 </html>

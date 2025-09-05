@@ -1,3 +1,4 @@
+<!-- Save as logo.svg -->
 <svg width="220" height="60" viewBox="0 0 220 60" fill="none" xmlns="http://www.w3.org/2000/svg">
   <!-- Shield background -->
   <path d="M40 54s28-14 28-35V13L40 4 12 13v6c0 21 28 35 28 35z" fill="#64ffda" fill-opacity="0.18" stroke="#64ffda" stroke-width="2"/>
@@ -6,6 +7,6 @@
   <!-- Letter B -->
   <text x="40" y="40" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="32" font-weight="bold" fill="#FFD700" letter-spacing="2">B</text>
   <!-- Company Name -->
-  <text x="70" y="38" font-family="Poppins, Arial, sans-serif" font-size="32" font-weight="bold" fill="#64ffda">Brokers</text>
+  <text x="70" y="38" font-family="Poppins, Arial, sans-serif" font-size="32" font-weight="bold" fill="#64ffda">Brokage</text>
   <text x="70" y="56" font-family="Poppins, Arial, sans-serif" font-size="18" font-weight="600" fill="#FFD700">Hub</text>
 </svg>

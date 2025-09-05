@@ -8,10 +8,308 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <link rel="icon" type="image/svg+xml" href="{% static '' %}svg/favicon.svg">
-<link rel="stylesheet" href="{% static '' %}css/form.css"> 
+  <link rel="stylesheet" href="{% static '' %}css/form.css">
+  <style>
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      background: #0a192f;
+      color: #ccd6f6;
+      margin: 0;
+      padding: 0;
+      margin-top:10rem;
+    }
+    .form-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #64ffda 60%, #FFD700 100%);
+      width: 0;
+      z-index: 9999;
+      transition: width 0.2s;
+    }
+    .form-container {
+      max-width: 480px;
+      margin: 3rem auto 2rem auto;
+      background: rgba(10,25,47,0.85);
+      border-radius: 22px;
+      box-shadow: 0 8px 32px rgba(100,255,218,0.10);
+      padding: 2.5rem 2rem 2rem 2rem;
+      position: relative;
+      z-index: 2;
+      backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(100,255,218,0.18);
+    }
+    .form-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #FFD700;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+    }
+    .form-section {
+      margin-bottom: 2.2rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid #233554;
+      position: relative;
+    }
+    .section-label {
+      display: flex;
+      align-items: center;
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: #64ffda;
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.5px;
+    }
+    .section-label::before {
+      content: "📝";
+      margin-right: 0.5rem;
+      font-size: 1.2rem;
+    }
+    .form-section:nth-child(2) .section-label::before { content: "🆔"; }
+    .form-section:nth-child(3) .section-label::before { content: "💼"; }
+    .form-group {
+      margin-bottom: 1.2rem;
+      position: relative;
+    }
+    .form-group label {
+      color: #FFD700;
+      font-weight: 500;
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+      display: block;
+      transition: color 0.2s;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="password"],
+    .form-group input[type="file"],
+    .form-group input[type="tel"],
+    .form-group input[type="number"],
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      border-radius: 8px;
+      border: 1.5px solid #233554;
+      background: rgba(17,34,64,0.95);
+      color: #ccd6f6;
+      font-size: 1rem;
+      outline: none;
+      transition: border 0.2s, box-shadow 0.2s;
+      margin-top: 0.2rem;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: #64ffda;
+      box-shadow: 0 0 0 2px #64ffda33;
+    }
+    input[type="file"] {
+      background: transparent;
+      color: #ccd6f6;
+      border: none;
+      padding-left: 0;
+    }
+    .file-label {
+      color: #FFD700;
+      font-size: 0.98rem;
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+      display: block;
+    }
+    .error-message,
+    .validation-message.error {
+      color: #ff4d4f;
+      font-size: 0.98rem;
+      margin-top: 0.2rem;
+      font-weight: 500;
+    }
+    .validation-message.success {
+      color: #64ffda;
+      font-size: 0.98rem;
+      margin-top: 0.2rem;
+      font-weight: 500;
+    }
+    .consent-section {
+      margin: 1.5rem 0 0.5rem 0;
+      display: flex;
+      align-items: center;
+    }
+    .consent-checkbox {
+      display: flex;
+      align-items: center;
+    }
+    .consent-checkbox input[type="checkbox"] {
+      accent-color: #FFD700;
+      margin-right: 0.5rem;
+      width: 1.1rem;
+      height: 1.1rem;
+    }
+    .consent-text {
+      color: #ccd6f6;
+      font-size: 1rem;
+    }
+    .btn[type="submit"], .btn[type="submit"]:focus {
+      width: 100%;
+      background: linear-gradient(90deg, #64ffda 60%, #FFD700 100%);
+      color: #0a192f !important;
+      border: none;
+      border-radius: 8px;
+      padding: 0.9rem 0;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-top: 1.2rem;
+      margin-bottom: 0.5rem;
+      box-shadow: 0 2px 8px rgba(100,255,218,0.10);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+    .btn[type="submit"]:hover {
+      background: linear-gradient(90deg, #FFD700 60%, #64ffda 100%);
+      color: #0a192f !important;
+      box-shadow: 0 8px 32px rgba(100,255,218,0.18);
+    }
+    .btn[type="submit"]::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255,215,0,0.3);
+      border-radius: 100%;
+      transform: translate(-50%, -50%);
+      transition: width 0.4s ease, height 0.4s ease, opacity 0.6s;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .btn[type="submit"]:active::after {
+      width: 200px;
+      height: 200px;
+      opacity: 1;
+      transition: 0s;
+    }
+    .messages {
+      max-width: 480px;
+      margin: 1.5rem auto 0 auto;
+    }
+    .message {
+      padding: 1rem 1.2rem;
+      border-radius: 8px;
+      margin-bottom: 0.7rem;
+      font-size: 1rem;
+      font-weight: 500;
+      background: #112240;
+      color: #FFD700;
+      box-shadow: 0 2px 8px rgba(100,255,218,0.08);
+      animation: fadeIn 0.5s;
+    }
+    .message.error { color: #ff4d4f; }
+    .message.success { color: #64ffda; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    @keyframes slideOut {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(100%); opacity: 0; }
+    }
+    /* Responsive */
+    @media (max-width: 600px) {
+      .form-container {
+        padding: 1.2rem 0.5rem;
+        max-width: 98vw;
+      }
+      .messages { max-width: 98vw; }
+    }
 
+.messages {
+  max-width: 480px;
+  margin: 1.5rem auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  z-index: 10;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 1.2rem;
+  margin-top: 5rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  background: rgba(17,34,64,0.92);
+  color: #FFD700;
+  box-shadow: 0 4px 24px rgba(100,255,218,0.10);
+  border-left: 5px solid #FFD700;
+  animation: fadeIn 0.5s;
+  position: relative;
+  overflow: hidden;
+}
+
+.message.success {
+  color: #64ffda;
+  border-left: 5px solid #64ffda;
+  background: rgba(17,34,64,0.97);
+}
+
+.message.error {
+  color: #ff4d4f;
+  border-left: 5px solid #ff4d4f;
+  background: rgba(34,17,32,0.97);
+}
+
+.message::before {
+  content: '';
+  display: inline-block;
+  width: 1.3em;
+  height: 1.3em;
+  margin-right: 0.5em;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.message.success::before {
+  content: '✔';
+  color: #64ffda;
+  font-size: 1.3em;
+}
+
+.message.error::before {
+  content: '⛔';
+  color: #ff4d4f;
+  font-size: 1.3em;
+}
+
+.message:not(.success):not(.error)::before {
+  content: 'ℹ️';
+  color: #FFD700;
+  font-size: 1.3em;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+@keyframes slideOut {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(100%); opacity: 0; }
+}
+
+  </style>
 </head>
 <body>
+  <!-- Progress Bar -->
+  <div class="form-progress-bar" id="formProgressBar"></div>
+
   <!-- Animated Background -->
   <div class="bg-animated">
     <div class="bg-shape bg-shape1"></div>
@@ -19,14 +317,22 @@
     <div class="bg-shape bg-shape3"></div>
   </div>
 
+
+    <!-- Animated Background -->
+  <div class="bg-animated">
+    <div class="bg-shape bg-shape1"></div>
+    <div class="bg-shape bg-shape2"></div>
+    <div class="bg-shape bg-shape3"></div>
+  </div>
+
+
   <nav class="navbar">
     <div class="nav-container">
-      {% comment %} <a href="#home" class="logo"><img src="{% static '' %}svg/logo.svg" alt="Brokage Hub Logo" style="height:48px;"></a> {% endcomment %}
       <a class="btn" style="color:#fff; padding: 0.5rem 1rem;" href="#" onclick="history.back()">← Back to Home</a>
     </div>
   </nav>
 
-   <!-- Messages -->
+  <!-- Messages -->
   {% if messages %}
     <div class="messages">
       {% for message in messages %}
@@ -37,8 +343,6 @@
     </div>
   {% endif %}
 
-
- 
   <div class="form-container" data-aos="fade-up">
     <div class="form-title">Registration Form</div>
     <form method="post" enctype="multipart/form-data">
@@ -77,7 +381,7 @@
           {{ form.ssn}}
         </div>
       </div>
-      
+
       <!-- Means of Identification -->
       <div class="form-section" data-aos="fade-right" data-aos-delay="100">
         <span class="section-label">Means of Identification</span>
@@ -90,7 +394,7 @@
           {{ form.id_back }}
         </div>
       </div>
-      
+
       <!-- Tax Record / Identification -->
       <div class="form-section" data-aos="fade-right" data-aos-delay="200">
         <span class="section-label">Tax Record / Identification</span>
@@ -100,7 +404,7 @@
         </div>
       </div>
 
-        <!-- Consent Section -->
+      <!-- Consent Section -->
       <div class="consent-section" data-aos="fade-right" data-aos-delay="300">
         <div class="consent-checkbox">
           {{ form.idme_consent }}
@@ -108,72 +412,49 @@
             {{ form.idme_consent.label }}
           </label>
         </div>
-      </div>  
-      
+      </div>
+
       <button type="submit" class="btn">Submit</button>
     </form>
   </div>
-  
+
   <!-- Footer -->
   <footer class="footer">
     <p>Designed & Built by {{hub.name|title}}&nbsp;Team</p>
     <p>&copy; 2023 {{hub.name|title}}. All Rights Reserved.</p>
   </footer>
-  
+
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  {% comment %} <script src="{% static '' %}js/index.js"></script> {% endcomment %}
   <script>
     AOS.init({ duration: 1000, once: true, offset: 50 });
 
-        // Real-time email validation
-    document.getElementById('id_email').addEventListener('blur', function() {
-      const email = this.value;
-      const validationDiv = document.getElementById('email-validation');
-      
-      if (email) {
-        fetch(`/check-email/?email=${encodeURIComponent(email)}`)
-          .then(response => response.json())
-          .then(data => {
-            if (data.exists) {
-              validationDiv.className = 'validation-message error';
-              validationDiv.textContent = 'Email is available.';
-            }
-          })
-          .catch(error => {
-            console.error('Error checking email:', error);
-          });
-      } else {
-        validationDiv.className = 'validation-message';
-        validationDiv.textContent = '';
+    // Progress Bar on Scroll
+    document.addEventListener('scroll', function() {
+      const form = document.querySelector('.form-container');
+      const bar = document.getElementById('formProgressBar');
+      if (!form || !bar) return;
+      const rect = form.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const totalHeight = form.scrollHeight - windowHeight;
+      let scrolled = 0;
+      if (rect.top < 0) {
+        scrolled = Math.min(1, Math.abs(rect.top) / (form.scrollHeight - windowHeight));
       }
+      bar.style.width = (scrolled * 100) + '%';
     });
-    
-    // Real-time phone validation
-    document.getElementById('id_phone').addEventListener('blur', function() {
-      const phone = this.value;
-      const validationDiv = document.getElementById('phone-validation');
-      
-      if (phone) {
-        fetch(`/check-phone/?phone=${encodeURIComponent(phone)}`)
-          .then(response => response.json())
-          .then(data => {
-            if (data.exists) {
-              validationDiv.className = 'validation-message error';
-              validationDiv.textContent = 'This phone number is already registered.';
-            } else {
-              validationDiv.className = 'validation-message success';
-              validationDiv.textContent = 'Phone number is available.';
-            }
-          })
-          .catch(error => {
-            console.error('Error checking phone:', error);
-          });
-      } else {
-        validationDiv.className = 'validation-message';
-        validationDiv.textContent = '';
-      }
+
+    // Animated floating labels (optional, if you want to highlight label on focus)
+    document.querySelectorAll('.form-group input, .form-group textarea, .form-group select').forEach(function(input) {
+      input.addEventListener('focus', function() {
+        var label = this.parentElement.querySelector('label');
+        if(label) label.style.color = '#64ffda';
+      });
+      input.addEventListener('blur', function() {
+        var label = this.parentElement.querySelector('label');
+        if(label) label.style.color = '#FFD700';
+      });
     });
-    
+
     // Auto-hide messages after 5 seconds
     document.addEventListener('DOMContentLoaded', function() {
       const messages = document.querySelectorAll('.message');
@@ -185,15 +466,5 @@
       });
     });
   </script>
-    <style>
-    @keyframes slideOut {
-      from { transform: translateX(0); opacity: 1; }
-      to { transform: translateX(100%); opacity: 0; }
-    }
-    
-  </style>
 </body>
-{% comment %} </html>This email is already registered.';
-            } else {
-              validationDiv.className = 'validation-message success';
-              validationDiv.textContent = ' {% endcomment %}
+</html>

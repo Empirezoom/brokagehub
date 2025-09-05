@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brokage Hub - Your Trusted Financial Partner</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="icon" type="image/svg+xml" href="{% static '' %}svg/favicon.svg">
+  <link rel="stylesheet" href="{% static '' %}css/index.css"> 
+</head>
+<body>
+  <!-- Animated Background -->
+  <div class="bg-animated">
+    <div class="bg-shape bg-shape1"></div>
+    <div class="bg-shape bg-shape2"></div>
+    <div class="bg-shape bg-shape3"></div>
+  </div>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#home" class="logo"><img src="{% static '' %}svg/logo.svg" alt="Brokage Hub Logo" style="height:48px;"></a> 
+      <ul class="nav-menu">
+        <li><a href="{% url 'homepage' %}">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">Why Us</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a class="btn" style="color:#FFD700;" href="{% url 'register' %}">JoinNow</a></li>
+      </ul>
+      <div class="hamburger" aria-label="Open navigation" tabindex="0">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </div>
+    </div>
+  </nav>
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div class="hero-content" data-aos="fade-up">
+      <h1>Empowering Your <span class="highlight">Financial Future.</span></h1>
+      <p>We provide comprehensive financial solutions—from payroll and accounting to strategic consulting—to help your business thrive.</p>
+      <a href="{% url 'register' %}" class="btn">Get Started?</a>
+    </div>
+  </section>
+  <!-- Services -->
+  <section id="services" class="section">
+    <h2 class="section-title" data-aos="fade-right">Our Expertise</h2>
+    <div class="services-grid">
+      
+
+        
+        {% for sv in serv %}
+        
+        <div class="service-card" data-aos="fade-up">
+          <h3>{{sv.title|safe}}</h3>
+          <ul>
+            <li>{{sv.item1}}</li>
+            <li>{{sv.item2}}</li>
+            <li>{{sv.item3}}</li>
+            <li>{{sv.item4}}</li>
+
+          </ul>
+          <br>
+           {% comment %} <a href="bookkeeping-accounting.html" class="btn" style="margin-top: auto; text-align: center;">Learn More</a> {% endcomment %}
+
+
+           {% comment %} <a href="bookkeeping-accounting.html" class="btn" style="margin-top: auto; text-align: center;">Learn More</a> {% endcomment %}
+
+
+          {% if sv.title == 	'Payroll Management'  %}
+            	<a href="{% url 'payroll' %}" class="btn" style="margin-top: auto; text-align: center;">Learn More</a>
+              {% elif sv.title == 	'Bookkeeping & Accounting' %}
+            	<a href="{% url 'book_keeping' %}" class="btn" style="margin-top: auto; text-align: center;">Learn More</a>
+              {% elif sv.title == 	'Financial Consulting' %}
+            	<a href="{% url 'financial' %}" class="btn" style="margin-top: auto; text-align: center;">Learn More</a>
+              {% elif sv.title == 	'Tax Planning & Preparation' %}
+            	<a href="{% url 'tax_planning' %}" class="btn" style="margin-top: auto; text-align: center;">Learn More</a>
+              {% elif sv.title == 	'Business Incorporation Services' %}
+            	<a href="{% url 'business_incorporation' %}" class="btn" style="margin-top: auto; text-align: center;">Learn More</a>
+              {% elif sv.title == 	'Compliance & Reporting' %}
+            	<a href="{% url 'compliance' %}" class="btn" style="margin-top: auto; text-align: center;">Learn More</a>
+              {% else %}
+              Payroll Management
+          {% endif %}
+
+           
+        </div>
+        {% endfor %}
+          
+
+        
+      
+    </div>
+  </section>
+  <!-- Why Us -->
+  <section id="about" class="section">
+    <h2 class="section-title" data-aos="fade-right">Why Choose Us?</h2>
+    <div class="features-grid">
+      
+      {% if chosen %}
+        
+        {% for c in chosen %}
+        <div class="feature-card" data-aos="zoom-in" data-aos-delay="{{c.delay}}">
+          <div class="feature-icon">
+            <!-- Lock Icon -->
+            {{c.svg|safe}}
+          </div>
+          <h3>{{c.title|title}}</h3>
+          <p>{{c.item}}</p>
+        </div>
+        
+        {% endfor %}
+          
+      {% endif %}
+        
+    </div>
+  </section>
+  <!-- Testimonials -->
+  <section id="testimonials" class="section">
+    <h2 class="section-title" data-aos="fade-right">What Our Clients Say</h2>
+    <div class="testimonial-grid">
+     
+     {% if test %}
+      
+      {% for ts in test %}
+      
+      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="{{ts.delay}}">
+        <p class="testimonial-text">"{{ts.text}}"</p>
+        <p class="testimonial-author">— {{ts.author}}</p>
+      </div>
+      {% endfor %}
+        
+     {% endif %}
+      
+    </div>
+  </section>
+  {% comment %} <!-- Contact -->
+  <section id="contact" class="section">
+    <h2 class="section-title" data-aos="fade-up">Get in Touch</h2>
+    <p data-aos="fade-up" data-aos-delay="100">Have a question or want to get started? Our inbox is always open. Whether you have a question or just want to say hi, we’ll try our best to get back to you!</p>
+    <div data-aos="fade-up" data-aos-delay="200">
+      <a href="{{hub.telegram_link}}" class="btn" style="color: azure;">
+            <span class="telegram-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-.14.06-.19.1-.09.08-1.4.89-3.95 2.62-.37.27-.71.4-1.01.39-.33-.01-.97-.19-1.44-.35-.58-.2-1.04-.31-1-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.37.08 0 .27.02.39.12.1.08.12.19.14.27.01.06.03.2.01.31z"/>
+          </svg>
+        </span>
+        Telegram
+      </a>
+      <a href="mailto:{{hub.email}}" class="btn" style="color: azure;">Mail&nbsp;✉</a>
+      <a href="tell:{{hub.phone}}" class="btn" style="color: azure;">📞Tell</a>
+      
+
+    </div>
+  </section> {% endcomment %}
+
+
+
+
+   <!-- Contact Section Only -->
+  <section id="contact" class="section">
+    <h2 class="section-title">Get in Touch</h2>
+    <p>Have a question or want to get started? Our inbox is always open. Whether you have a question or just want to say hi, we'll try our best to get back to you!</p>
+    
+    <div class="contact-buttons">
+      <a href="{{hub.telegram_link}}" class="contact-btn telegram">
+        <span class="telegram-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-.14.06-.19.1-.09.08-1.4.89-3.95 2.62-.37.27-.71.4-1.01.39-.33-.01-.97-.19-1.44-.35-.58-.2-1.04-.31-1-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.37.08 0 .27.02.39.12.1.08.12.19.14.27.01.06.03.2.01.31z"/>
+          </svg>
+        </span>
+        Telegram
+      </a>
+      <a href="mailto:{{hub.email}}" class="contact-btn mail">Mail ✉</a>
+      <a href="tel:{{hub.phone}}" class="contact-btn phone">📞 Call</a>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Designed & Built by {{hub.name|title}}&nbsp;Team</p>
+    <p>&copy; 2023 {{hub.name|title}}. All Rights Reserved.</p>
+  </footer>
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script src="{% static '' %}js/index.js"></script>
+</body>
+</html>
