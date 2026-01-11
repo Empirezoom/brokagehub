@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-wixhzapos9t2t@sej5qm91xcb@3uu3r1efca2hc8n_-m2zm3nm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://brokershub.onrender.com','www.brokagehub.com','brokagehub.com']
 
 
 # Application definition
